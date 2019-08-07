@@ -1,5 +1,5 @@
 clear;clear memory;
-addpath('./tools')
+
 nbits_set = [16];%[8,16,32,48,64,96,128];
 
 %% Load dataset
@@ -8,6 +8,7 @@ X{1} = [I_tr;I_te];
 X{2} = [T_tr;T_te];
 gnd = [L_tr;L_te];
 
+% Anchor feature embedding
 view_num = size(X,2);
 n_anchor = 500;
 Anchor = cell(1,view_num);
@@ -39,7 +40,7 @@ for ii=1:length(nbits_set)
         data_our.X{view} = normEqualVariance(X{view}')';
         ttfea{view} = data_our.X{view}(:,tt_idx);
     end
-
+    
     for n_iters = 1:5
         pars.beta     = .5; 
         pars.gamma    = 100; 
